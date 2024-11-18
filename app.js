@@ -257,7 +257,12 @@ function drawSpine(ctx, spine) {
   ribLength = ribLengthMax;
 }
 
-canvas.addEventListener('mousemove', (event) => {
-  processSpine(spine, event.offsetX, event.offsetY);
+document.onmousemove = function (e) {
+  processSpine(spine, e.clientX, e.clientY);
   drawSpine(ctx, spine);
-});
+};
+
+document.ontouchmove = function (e) {
+  processSpine(spine, e.touches[0].clientX, e.touches[0].clientY);
+  drawSpine(ctx, spine);
+};
